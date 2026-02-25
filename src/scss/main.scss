@@ -1,0 +1,72 @@
+@use './base/reset';
+@use './base/footer';
+@use 'header';
+@use 'hero';
+@use 'certification';
+@use 'services';
+@use 'marquee';
+@use './page/archive-certification';
+@use './page/training';
+@use './page/about';
+@use 'choose';
+@use 'contact';
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap');
+
+
+
+:root {
+  /* --- ПАЛИТРА (Менять здесь) --- */
+  --clr-primary: #0F172A;      /* Темно-синий/Черный (Текст, заголовки) */
+  --clr-accent: #F7E047;       /* (Кнопки, активные элементы) */
+  --clr-bg-body: #c2c4c4;      /* Светло-серый фон страницы (не белый!) */
+  --clr-bg-card: #FFFFFF;      /* Белый фон карточек */
+  --clr-text-muted: #64748B;   /* Серый текст для описания */
+  --clr-border: #E2E8F0;       /* Легкие границы */
+
+  /* --- РАЗМЕРЫ И ОТСТУПЫ --- */
+  --radius-xl: 32px;           /* Большие скругления (Bento стиль) */
+  --radius-md: 16px;           /* Средние скругления (Кнопки) */
+  --radius-pill: 100px;        /* Для "пилюль" сертификаций */
+  --container-width: 1280px;   /* Максимальная ширина */
+  --sp-sm: 1rem;
+  --sp-md: 2rem;
+  --sp-lg: 4rem;
+
+
+
+
+
+}
+
+body {
+  font-family: 'Manrope', sans-serif; /* Подключи шрифт в хедере */
+  margin: 0;
+  // background-attachment: fixed; /* Чтобы фон стоял на месте при скролле */
+  min-height: 100vh;
+
+
+
+ 
+
+
+ 
+
+}
+main {
+  // background: transparent;
+  background-attachment: fixed;
+   background: linear-gradient(135deg, #848d9a 0%, #2E2F33 100%);
+    color: var(--clr-primary);
+}
+
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--sp-sm);
+}
+
+
+// a:visited {
+//     color: inherit;
+// }

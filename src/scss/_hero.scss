@@ -1,0 +1,489 @@
+
+// HERO
+/* --- HERO SECTION 1w--- */
+// .hero {
+//   position: relative;
+//   min-height: 100vh; /* На весь экран */
+//   width: 100%;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: space-between; /* Раскидываем: контент сверху, панель снизу */
+//   overflow: hidden;
+//   color: white;
+//   padding-top: 120px; /* Отступ сверху под шапку */
+// }
+
+// /* Слой с фоновой картинкой */
+// .hero__bg-layer {
+//   position: absolute;
+//   top: 0; left: 0; width: 100%; height: 100%;
+//   z-index: -1;
+//   /* Замени URL на свою картинку */
+//   background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop'); 
+//   background-size: cover;
+//   background-position: center;
+  
+//   /* Блюр и затемнение фона */
+//   filter: blur(8px) brightness(0.6); 
+//   transform: scale(1.05); /* Увеличиваем, чтобы не было белых краев от блюра */
+// }
+
+// .hero__container {
+//   display: flex;
+//   flex-direction: column;
+//   height: 100%;
+//   flex-grow: 1;
+//   justify-content: center; /* Центруем контент по вертикали в свободном месте */
+//   gap: 60px; /* Расстояние между текстом и нижней панелью */
+// }
+
+// /* --- ВЕРХНИЙ КОНТЕНТ --- */
+// .hero__content {
+//   max-width: 800px; /* Ограничиваем ширину текста */
+//   margin: 0 auto;   /* Центруем текст по горизонтали */
+//   text-align: center;
+// }
+
+// .hero__logo-text {
+//   font-size: 14px;
+//   letter-spacing: 2px;
+//   text-transform: uppercase;
+//   opacity: 0.8;
+//   margin-bottom: 20px;
+//   font-weight: 600;
+// }
+
+// .hero__title {
+//   font-size: 3.5rem; /* Крупно */
+//   line-height: 1.1;
+//   margin-bottom: 24px;
+//   color: #ffffff;
+//   text-shadow: 0 2px 20px rgba(0,0,0,0.5); /* Тень для читаемости */
+// }
+
+// .hero__desc {
+//   font-size: 1.125rem;
+//   color: rgba(255,255,255,0.9);
+//   margin-bottom: 40px;
+//   max-width: 600px;
+//   margin-left: auto;
+//   margin-right: auto;
+// }
+
+// /* Форма в херо */
+// .hero-form {
+//   display: inline-flex;
+//   background: rgba(255, 255, 255, 0.15);
+//   backdrop-filter: blur(10px);
+//   padding: 6px;
+//   border-radius: 50px; /* Полное скругление */
+//   border: 1px solid rgba(255, 255, 255, 0.3);
+// }
+
+// .hero-form__input {
+//   background: transparent;
+//   border: none;
+//   padding: 0 24px;
+//   color: white;
+//   min-width: 250px;
+//   outline: none;
+//   font-size: 1rem;
+// }
+
+// .hero-form__input::placeholder {
+//   color: rgba(255, 255, 255, 0.7);
+// }
+
+// .btn--hero {
+//   background: var(--clr-accent); /* Зеленый/Акцентный */
+//   color: white;
+//   border: none;
+//   padding: 14px 32px;
+//   border-radius: 50px;
+//   font-weight: 600;
+//   cursor: pointer;
+//   transition: all 0.3s;
+// }
+
+// .btn--hero:hover {
+//   filter: brightness(1.1);
+//   transform: translateY(-1px);
+// }
+
+// /* --- НИЖНЯЯ ПАНЕЛЬ (СТЕКЛО) --- */
+// .hero__bottom-panel {
+//   display: grid;
+//   grid-template-columns: repeat(4, 1fr); /* 4 колонки в ряд */
+//   gap: 1px; /* Тонкие разделители */
+  
+//   /* Стиль капсулы */
+//   background: rgba(20, 20, 20, 0.6); /* Темное стекло */
+//   backdrop-filter: blur(20px);
+//   -webkit-backdrop-filter: blur(20px);
+//   border: 1px solid rgba(255, 255, 255, 0.1);
+//   border-radius: 24px;
+//   padding: 10px;
+//   margin-bottom: 40px; /* Отступ от бегущей строки */
+// }
+
+// /* Изолированный класс карточки для Hero */
+// .hero-card {
+//   padding: 24px;
+//   text-align: center; /* Или left */
+//   border-radius: 16px;
+//   transition: background 0.3s;
+//   color: white;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   justify-content: center;
+//   cursor: pointer;
+// }
+
+// .hero-card:hover {
+//   background: rgba(255, 255, 255, 0.1); /* Подсветка при наведении */
+// }
+
+// .hero-card__icon {
+//   font-size: 32px;
+//   margin-bottom: 12px;
+// }
+
+// .hero-card__title {
+//   font-size: 1rem;
+//   font-weight: 500;
+//   line-height: 1.3;
+//   color: rgba(255, 255, 255, 0.9);
+// }
+
+// /* --- MARQUEE (БЕГУЩАЯ СТРОКА) --- */
+// .hero__marquee {
+//   background: #000; /* Чисто черный низ */
+//   color: white;
+//   padding: 12px 0;
+//   overflow: hidden;
+//   border-top: 1px solid rgba(255,255,255,0.1);
+// }
+
+// .marquee-content {
+//   display: flex;
+//   white-space: nowrap;
+//   animation: marquee-scroll 30s linear infinite;
+//   font-weight: 700;
+//   text-transform: uppercase;
+//   font-size: 14px; /* Аккуратный размер, не гигантский */
+//   letter-spacing: 1px;
+// }
+
+// .marquee-content span {
+//   padding-right: 50px;
+// }
+
+// @keyframes marquee-scroll {
+//   0% { transform: translateX(0); }
+//   100% { transform: translateX(-50%); }
+// }
+
+// /* --- АДАПТИВ (MOBILE) --- */
+// @media (max-width: 900px) {
+//   .hero__title {
+//     font-size: 2.5rem;
+//   }
+  
+//   /* На планшете и мобильном ломаем ряд на 2x2 */
+//   .hero__bottom-panel {
+//     grid-template-columns: 1fr 1fr;
+//     gap: 10px;
+//     background: transparent; /* Убираем общую плашку, если тесно */
+//     border: none;
+//     padding: 0;
+//   }
+  
+//   .hero-card {
+//     background: rgba(20, 20, 20, 0.7); /* Теперь у каждой карточки свой фон */
+//     backdrop-filter: blur(15px);
+//     border: 1px solid rgba(255,255,255,0.1);
+//   }
+// }
+
+
+/* --- HERO MAIN CONFIG --- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-top: 140px; /* Отступ под шапку */
+  padding-bottom: 40px;
+  overflow: hidden; 
+  background-color: transparent; 
+  z-index: 1;
+  clip-path: inset(0);
+}
+
+/* --- ФОНОВЫЙ СЛОЙ (Параллакс эффект) --- */
+.hero__bg-layer {
+  position: fixed;
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%;
+  z-index: -1;
+  
+  /* Замени URL на свою картинку */
+  background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop'); 
+  background-size: cover;
+  background-position: center;
+  
+  /* Фиксация фона (картинка стоит на месте при скролле внутри секции) */
+//   background-attachment: fixed;
+  
+  /* Затемнение и блюр */
+  filter: blur(3px) brightness(0.5); 
+  transform: scale(1.02); /* Чуть увеличиваем, чтобы скрыть края блюра */
+}
+
+/* --- КОНТЕЙНЕР --- */
+.hero__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  height: 100%;
+  gap: 60px;
+}
+
+/* =========================================
+   2. ВЕРХНИЙ БЛОК (Текст + Форма)
+   ========================================= */
+.hero__top-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr; /* Левая колонка шире */
+  gap: 40px;
+  align-items: center;
+}
+
+/* --- ЛЕВАЯ КОЛОНКА (Текст) --- */
+.hero__text-col {
+  color: white;
+  padding-right: 20px;
+}
+
+.hero__logo-text {
+  font-size: 14px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+  font-weight: 700;
+  display: inline-block;
+  background: rgba(255,255,255,0.1);
+  padding: 6px 14px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+.hero__title {
+  font-size: 3.5rem; /* Крупный заголовок */
+  line-height: 1.1;
+  margin-bottom: 24px;
+  font-weight: 800;
+  text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+}
+
+.hero__desc {
+  font-size: 1.125rem;
+  color: rgba(255,255,255,0.9);
+  max-width: 600px;
+  line-height: 1.6;
+}
+
+/* --- ПРАВАЯ КОЛОНКА (Форма) --- */
+.hero__form-col {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.request-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);         
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 32px;
+  border-radius: 24px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.request-card__title {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.request-card__subtitle {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+}
+
+/* Поля формы */
+.hero-form-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.input-glass {
+  background: rgba(0, 0, 0, 0.3); 
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 16px;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s;
+}
+
+.input-glass:focus {
+  border-color: var(--clr-accent);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.input-glass::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.btn--full {
+  width: 100%;
+  padding: 16px;
+  font-size: 1rem;
+  margin-top: 8px;
+//   background: var(--clr-accent);
+    background: transparent;
+  color: white;
+  border: 1px solid var(--clr-border);
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.3s;
+}
+
+.btn--full:hover {
+  border: 1px solid var(--clr-accent);
+}
+
+/* =========================================
+   3. НИЖНЯЯ ПАНЕЛЬ (4 Карточки)
+   ========================================= */
+.hero__bottom-panel {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 колонки */
+  gap: 20px;
+  
+  background: transparent; /* Прозрачный контейнер */
+  border: none;
+  padding: 0;
+  margin-top: auto;
+}
+
+.hero-card {
+  background: rgba(255, 255, 255, 0.1); /* Темный фон отдельной карточки */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 6px solid transparent;
+  border-radius: 16px;
+  
+  padding: 24px 16px;
+  text-align: center;
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  cursor: pointer;
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+}
+
+.hero-card:hover {
+//   background: var(--clr-accent); /* Зеленый при наведении */
+//   border-color: var(--clr-accent);
+// border: 6px solid rgba(253, 228, 40, 0.2);
+//   transform: translateY(-8px);
+//   box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+    border: 1px solid #F7E047;  
+    box-shadow: 0 0 0 6px #F7E04733;
+}
+
+.hero-card__icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.hero-card__title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* =========================================
+   5. АДАПТИВНОСТЬ (Mobile)
+   ========================================= */
+@media (max-width: 992px) {
+  .hero__top-row {
+    grid-template-columns: 1fr; /* Одна колонка */
+    text-align: center;
+  }
+  
+  .hero__form-col {
+    justify-content: center;
+  }
+  
+  .hero__title {
+    font-size: 2.8rem;
+  }
+  
+  .hero__desc {
+    margin: 0 auto; /* Центруем описание */
+  }
+  
+  .hero__bottom-panel {
+    grid-template-columns: 1fr 1fr; /* 2 колонки на планшете */
+  }
+}
+
+@media (max-width: 500px) {
+  .hero {
+    padding-top: 100px;
+  }
+
+  .hero__title {
+    font-size: 2.2rem;
+  }
+  
+  .hero__bottom-panel {
+    grid-template-columns: 1fr; /* 1 колонка на телефоне */
+    gap: 12px;
+  }
+  
+  .hero-card {
+    flex-direction: row; /* Горизонтальная карточка на мобилке удобнее */
+    justify-content: flex-start;
+    padding: 16px;
+    min-height: auto;
+    text-align: left;
+    gap: 16px;
+  }
+  
+  .hero-card__icon {
+    margin-bottom: 0;
+    font-size: 28px;
+  }
+}

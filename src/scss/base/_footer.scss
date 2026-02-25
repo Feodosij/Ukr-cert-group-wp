@@ -1,0 +1,120 @@
+.site-footer {
+    /* Робимо футер напівпрозорим */
+    // background: rgba(255, 255, 255, 0.4); 
+       background: linear-gradient(135deg, #848d9a 0%, #2E2F33 100%);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    
+    /* Верхня рамка, щоб відділити від контенту */
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    
+    padding: 60px 0 40px;
+    // margin-top: 80px; /* Відступ від контенту сайту */
+    color: var(--clr-border);
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr; /* Ліва колонка ширша */
+    gap: 40px;
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr; /* На мобільному в стовпчик */
+        text-align: center;
+        gap: 30px;
+    }
+}
+
+/* --- Заголовки --- */
+.footer-logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--clr-border);
+}
+
+.footer-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    opacity: 0.8;
+}
+
+/* --- Тексти --- */
+.footer-desc {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    max-width: 300px;
+    color: var(--clr-border);
+}
+
+.footer-copyright {
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+
+/* --- Меню та Посилання --- */
+.footer-menu-list, 
+.contact-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        margin-bottom: 12px;
+    }
+
+    a {
+        text-decoration: none;
+        color: var(--clr-border);
+        font-weight: 500;
+        transition: color 0.3s ease;
+        opacity: 0.8;
+
+        &:hover {
+            color: var(--clr-accent); /* Ваш зелений колір */
+            opacity: 1;
+        }
+    }
+}
+
+/* --- Соцмережі (Круглі кнопки) --- */
+.social-links {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    
+    /* Центрування на мобільному */
+    @media (max-width: 768px) {
+        justify-content: center;
+    }
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    color: var(--clr-primary);
+    transition: all 0.3s ease;
+    
+    svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    &:hover {
+        background: var(--clr-accent); /* Зелений фон при наведенні */
+        color: white; /* Біла іконка */
+        transform: translateY(-3px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+}

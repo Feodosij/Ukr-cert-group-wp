@@ -1,0 +1,146 @@
+.training-page-wrapper {
+    padding: 60px 0;
+}
+
+.training-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Одна колонка для кращого сприйняття великої кількості тексту */
+    gap: 40px;
+    margin-bottom: 60px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.training-card {
+    padding: 40px;
+    /* Стилі glass-panel вже мають бути у вас, але якщо що - додайте сюди background/backdrop-filter */
+    
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        margin-bottom: 24px;
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+        padding-bottom: 20px;
+
+        @media (max-width: 600px) {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+}
+
+.training-icon {
+    font-size: 3rem;
+    background: #fff;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+.training-title {
+    margin: 0;
+    font-size: 1.8rem;
+    color: var(--clr-primary);
+    line-height: 1.2;
+}
+
+.training-desc {
+    font-size: 1.1rem;
+    color: #444;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+/* Список із зеленими галочками (як на скріншотах) */
+.check-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li {
+        position: relative;
+        padding-left: 36px;
+        margin-bottom: 16px;
+        font-size: 1rem;
+        line-height: 1.5;
+        color: #555;
+
+        strong {
+            color: var(--clr-primary);
+        }
+
+        &::before {
+            content: '✔'; /* Або SVG іконка */
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 24px;
+            height: 24px;
+            background: var(--clr-accent); /* Зелений колір */
+            color: white;
+            border-radius: 4px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}
+
+.training-result, .training-cta {
+    margin-top: 24px;
+    padding: 16px;
+    background: rgba(255, 255, 200, 0.4); /* Легкий жовтий відтінок для акценту */
+    border-radius: 12px;
+    font-weight: 600;
+    color: #444;
+    border-left: 4px solid #f1c40f;
+}
+
+/* Нижній контактний блок */
+.training-contact {
+    text-align: center;
+    padding: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+
+    h3 {
+        font-size: 2rem;
+        margin-bottom: 16px;
+    }
+    
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        color: #555;
+    }
+
+    .contact-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+
+        .btn {
+            font-size: 1.1rem;
+            padding: 16px 32px;
+        }
+
+        .btn--outline {
+            border: 2px solid var(--clr-primary);
+            color: var(--clr-primary);
+            background: transparent;
+            
+            &:hover {
+                background: var(--clr-primary);
+                color: white;
+            }
+        }
+    }
+}

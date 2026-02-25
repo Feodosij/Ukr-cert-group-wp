@@ -1,0 +1,158 @@
+/* --- ЗАГАЛЬНІ СТИЛІ СЕКЦІЇ --- */
+.why-choose {
+  padding: 80px 0;
+  position: relative;
+  /* Фон береться з body (градієнт), тому тут нічого не додаємо */
+}
+
+.why-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px;
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: var(--clr-border);
+  }
+
+  .section-desc {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    color: var(--clr-border); /* Трохи темніший за muted */
+  }
+}
+
+/* --- ЕФЕКТ СКЛА (Glassmorphism) --- */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.6); /* Напівпрозорий білий */
+  backdrop-filter: blur(16px);           /* Сильне розмиття */
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+  border-radius: 24px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s;
+}
+
+.glass-panel:hover {
+//   transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.75); /* Світлішає при наведенні */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  border-color: rgba(255, 255, 255, 1);
+}
+
+/* --- ВАРІАНТ 1: СІТКА (GRID) --- */
+/* Використовуйте клас "layout-grid" в HTML */
+.why-cards.layout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+
+  .why-card {
+    padding: 40px 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 100%; /* Однакова висота */
+  }
+
+  .why-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    background: linear-gradient(135deg, #fff 0%, #e2e8f0 100%);
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--clr-primary);
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #555;
+    margin: 0;
+  }
+}
+
+/* --- ВАРІАНТ 2: ГОРИЗОНТАЛЬНІ РЯДКИ (ROWS) --- */
+/* Якщо хочете цей варіант, змініть клас в HTML на "layout-rows" */
+.why-cards.layout-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 900px;
+  margin: 0 auto 60px;
+
+  .why-card {
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .why-icon {
+    font-size: 2.5rem;
+    min-width: 60px; /* Щоб не стискалась */
+    text-align: center;
+  }
+
+  .why-content {
+    display: flex;
+    flex-direction: column; /* Або row для тексту в рядок */
+  }
+
+  h3 {
+    margin: 0 0 4px 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+    color: #555;
+  }
+
+  /* Адаптив для рядків */
+  @media (max-width: 600px) {
+    .why-card {
+      flex-direction: column;
+      text-align: center;
+      padding: 30px;
+    }
+  }
+}
+
+/* --- ФУТЕР СЕКЦІЇ --- */
+.why-footer {
+  display: flex;
+  justify-content: center;
+
+  .text-block {
+    max-width: 900px;
+    padding: 40px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.4); /* Більш прозорий ніж картки */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    
+    p {
+      font-size: 1.2rem; /* Трохи більший шрифт */
+      font-weight: 500;
+      line-height: 1.6;
+      color: #334155;
+      margin: 0;
+    }
+  }
+}
