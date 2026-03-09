@@ -1,162 +1,178 @@
+@use './base/variables' as *;
+
+// CONTACT SECTION
 .contact-section {
-    padding: 80px 0;
-    position: relative;
+  padding: 80px 0;
+  position: relative;
+
+  @media (max-width: $bp-md) {
+    padding: 60px 0;
+  }
+
+  @media (max-width: $bp-sm) {
+    padding: 40px 0;
+  }
 }
 
-/* Оболонка тепер скляна */
 .contact-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr; /* Дві колонки */
-    gap: 60px;
-    align-items: center;
-    padding: 60px; /* Внутрішній відступ від країв скла */
-    
-    /* Примусово додаємо стилі скла сюди, якщо клас glass-panel десь перебивається */
-    background: rgba(255, 255, 255, 0.15); /* Більш прозорий фон */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 32px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+  padding: 60px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 32px;
 
-    @media (max-width: 900px) {
-        grid-template-columns: 1fr;
-        padding: 30px; /* Менше відступів на мобільному */
-        gap: 40px;
-    }
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    padding: 40px;
+    gap: 40px;
+  }
+
+  @media (max-width: $bp-sm) {
+    padding: 24px;
+    gap: 32px;
+    border-radius: 20px;
+  }
 }
 
-/* --- Ліва частина (Текст) --- */
 .contact-info {
-    .section-title {
-        margin-bottom: 20px;
-        text-align: left;
-        color: white;
-    }
+  .section-title {
+    margin-bottom: 20px;
+    text-align: left;
+    color: white;
+  }
 
-    .contact-desc {
-        font-size: 1.1rem;
-        line-height: 1.6;
-        color: white; /* Темно-сірий текст для читабельності */
-        margin-bottom: 40px;
+  .contact-desc {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: white;
+    margin-bottom: 40px;
+
+    @media (max-width: $bp-sm) {
+      font-size: 1rem;
+      margin-bottom: 28px;
     }
+  }
 }
 
 .contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  .contact-detail-item {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
+    align-items: center;
+    gap: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--clr-primary);
 
-    .contact-detail-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        font-size: 1.1rem;
-        font-weight: 600;
-        color: var(--clr-primary);
-
-        .icon {
-            font-size: 1.4rem;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: opacity 0.3s;
-
-            &:hover {
-                opacity: 0.7;
-            }
-        }
+    @media (max-width: $bp-sm) {
+      font-size: 1rem;
     }
+
+    .icon {
+      font-size: 1.4rem;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.3s;
+
+      &:hover {
+        color: var(--clr-accent);
+      }
+    }
+  }
 }
 
-/* --- Права частина (Форма) --- */
 .contact-form-box {
-    /* Прибрали фони та тіні, бо вони тепер у батьківському блоці */
-    width: 100%;
+  width: 100%;
 }
 
 .main-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
 
-    @media (max-width: 500px) {
-        grid-template-columns: 1fr;
-    }
+  @media (max-width: $bp-sm) {
+    grid-template-columns: 1fr;
+  }
 }
 
 .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
-    label {
-        font-size: 0.9rem;
-        font-weight: 600;
-        color: var(--clr-primary);
-        margin-left: 4px;
-        opacity: 0.8;
-    }
+  label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: white;
+    margin-left: 4px;
+    opacity: 0.8;
+  }
 }
 
-/* --- Стилі полів (Inputs) БЕЗ ефектів --- */
 .form-input {
-    width: 100%;
-    padding: 14px 16px;
-    border-radius: 12px;
-    
-    /* Статичний стиль */
-    background: rgba(255, 255, 255, 0.6); /* Напівпрозорий білий */
-    border: 1px solid rgba(255, 255, 255, 0.4); /* Ледь помітна рамка */
-    
-    font-family: inherit;
-    font-size: 1rem;
-    color: var(--clr-primary);
-    box-sizing: border-box;
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--clr-primary);
+  box-sizing: border-box;
+  outline: none;
 
-    /* Прибираємо стандартний аутлайн браузера */
-    outline: none;
+  &:focus {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: var(--clr-accent);
+  }
 
-    /* ПРИБРАНО: &:hover, transition */
-
-    /* Фокус (коли пишемо) - мінімальні зміни */
-    &:focus {
-        background: rgba(255, 255, 255, 0.9); /* Трохи біліше, щоб бачити де пишемо */
-        border-color: var(--clr-accent);
-        /* Жодних тіней і стрибків кольору */
-    }
-
-    &::placeholder {
-        color: #888;
-        font-weight: 400;
-    }
+  &::placeholder {
+    color: #888;
+    font-weight: 400;
+  }
 }
 
 textarea.form-input {
-    resize: vertical;
-    min-height: 120px;
+  resize: vertical;
+  min-height: 120px;
 }
 
-.btn--full-width {
-    width: 100%;
-    justify-content: center;
-    margin-top: 10px;
-    padding: 16px;
-    border-radius: 12px;
+.main-form .btn--full-width {
+  width: 100%;
+  justify-content: center;
+  margin-top: 10px;
+  padding: 16px;
+  font-size: 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  border: 1px solid white;
+  background-color: rgba(255, 255, 255, 0.15);
+
+  &:hover {
+    border-color: var(--clr-accent);
+    background-color: rgba(255, 255, 255, 0.60);
+  }
 }
 
 .form-note {
-    font-size: 0.75rem;
-    color: var(--clr-primary);
-    text-align: center;
-    margin-top: 10px;
-    opacity: 0.7;
+  font-size: 0.75rem;
+  color: white;
+  text-align: center;
+  margin-top: 10px;
+  opacity: 0.7;
 }

@@ -1,40 +1,69 @@
 <?php
 /**
- * The template for displaying all single posts
- *
- * @link https://developer.wordpress.org/themes/basics/template-hierarchy/#single-post
- *
- * @package ukr-cert-group
+ * Single post template
  */
-
 get_header();
+
+while ( have_posts() ) : the_post();
+
+$hero_bg = get_the_post_thumbnail_url( get_the_ID(), 'full' );
 ?>
+<main>
 
-	<main id="primary" class="site-main">
+<section class="page-hero"<?php if ( $hero_bg ) : ?> style="background-image: url('<?php echo esc_url( $hero_bg ); ?>');"<?php endif; ?>>
+    <div class="page-hero__overlay"></div>
+    <div class="container page-hero__content">
+        <h1 class="page-hero__title"><?php the_title(); ?></h1>
+    </div>
+</section>
 
-		<?php
-		while ( have_posts() ) :
-			the_post();
+<div class="single-post-article section-padding">
+    <div class="container">
 
-			get_template_part( 'template-parts/content', get_post_type() );
+        <nav class="breadcrumbs">
+            <a href="<?php echo esc_url( home_url( '/' ) ); ?>">Головна</a> /
+            <?php if ( get_option( 'page_for_posts' ) ) : ?>
+                <a href="<?php echo esc_url( get_permalink( get_option( 'page_for_posts' ) ) ); ?>">Блог</a> /
+            <?php endif; ?>
+            <span><?php the_title(); ?></span>
+        </nav>
 
-			the_post_navigation(
-				array(
-					'prev_text' => '<span class="nav-subtitle">' . esc_html__( 'Previous:', 'ukr-cert-group' ) . '</span> <span class="nav-title">%title</span>',
-					'next_text' => '<span class="nav-subtitle">' . esc_html__( 'Next:', 'ukr-cert-group' ) . '</span> <span class="nav-title">%title</span>',
-				)
-			);
+        <article class="single-post__article glass-panel">
 
-			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
-				comments_template();
-			endif;
+            <div class="single-post__content user-content">
+                <?php the_content(); ?>
 
-		endwhile; // End of the loop.
-		?>
+                <?php
+                $video_iframe = get_field( 'youtube_video' );
+                if ( $video_iframe ) : ?>
+                    <div class="video-wrapper">
+                        <?php echo $video_iframe; ?>
+                    </div>
+                <?php endif; ?>
+            </div>
 
-	</main><!-- #main -->
+            <?php
+            $tags = get_the_tags();
+            if ( $tags ) : ?>
+                <div class="single-post__tags">
+                    <?php foreach ( $tags as $tag ) :
+                        $tag_url = get_tag_link( $tag->term_id ); ?>
+                        <a href="<?php echo esc_url( $tag_url ); ?>" class="tag-pill"><?php echo esc_html( $tag->name ); ?></a>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
 
+            <div class="single-post__date">
+                <time datetime="<?php echo esc_attr( get_the_date( 'Y-m-d' ) ); ?>">
+                    <?php echo esc_html( get_the_date( 'd.m.Y' ) ); ?>
+                </time>
+            </div>
+
+        </article>
+    </div>
+</div>
+
+</main>
 <?php
-get_sidebar();
+endwhile;
 get_footer();

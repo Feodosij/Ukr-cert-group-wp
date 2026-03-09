@@ -1,90 +1,104 @@
-/* =========================================
-   СТРАНИЦЫ СЕРТИФИКАЦИЙ (Archive + Single)
-   ========================================= */
+@use '../base/variables' as *;
 
-/* --- 1. PAGE HERO (Верхняя шапка с фоном) --- */
+// PAGE HERO
 .page-hero {
-    position: relative;
-    /* Высота шапки */
-    min-height: 700px; 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    background-size: cover;
-    background-position: top;
-    background-repeat: no-repeat;
-    
-    /* Чтобы шапка "подныривала" под прозрачное меню сверху */
-    margin-top: -140px; /* Компенсация высоты хедера */
-    padding-top: 140px; /* Внутренний отступ, чтобы текст не налез на меню */
-    padding-bottom: 60px;
-    margin-bottom: 0;
-}
+  position: relative;
+  min-height: 700px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image: var(--hero-bg);
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  margin-top: -140px;
+  padding-top: 140px;
+  padding-bottom: 60px;
+  margin-bottom: 0;
 
-/* Затемнение фона (Оверлей) */
-.page-hero__overlay {
+  @media (max-width: 992px) {
+    min-height: 300px;
+    padding-top: 120px;
+    margin-top: 0;
+  }
+
+  &__overlay {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(17, 17, 17, 0.3); /* Темная вуаль */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(17, 17, 17, 0.3);
     z-index: 1;
-}
+  }
 
-.page-hero__content {
+  &__content {
     position: relative;
     z-index: 2;
     text-align: center;
     color: white;
     max-width: 900px;
-}
+  }
 
-.page-hero__title {
+  &__title {
     font-size: 3rem;
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 20px;
     color: #ffffff;
-    text-shadow: 0 4px 15px rgba(0,0,0,0.3);
-}
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 
-.page-hero__desc {
+    @media (max-width: 900px) {
+      font-size: 2rem;
+    }
+  }
+
+  &__desc {
     font-size: 1.15rem;
     line-height: 1.6;
     color: rgba(255, 255, 255, 0.9);
     max-width: 700px;
     margin: 0 auto;
+  }
 }
 
-/* --- 2. ОБЩАЯ СЕТКА (Layout) --- */
+
+// CERTIFICATIONS LAYOUT
 .cert-page-wrapper {
-    // background-color: var(--clr-bg-body); /* Светло-серый фон всего блока */
-    padding-top: 60px;
-    padding-bottom: 100px;
-    min-height: 80vh; /* Чтобы футер не прилипал, если контента мало */
+  padding-top: 60px;
+  padding-bottom: 100px;
+  min-height: 80vh;
 }
 
 .cert-layout {
-    display: grid;
-    /* Левая колонка (300px) + Отступ (40px) + Правая колонка (все остальное) */
-    grid-template-columns: 300px 1fr; 
-    gap: 40px;
-    align-items: start; /* Чтобы сайдбар не растягивался на всю высоту */
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 40px;
+  align-items: start;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
 }
 
-/* --- 3. САЙДБАР (Левая колонка) --- */
-.cert-sidebar { /* Отступ сверху при прокрутке (под хедер) */
-    z-index: 10;
-}
+.cert-sidebar {
+  z-index: 10;
 
-.cert-sidebar__inner {
+  @media (max-width: 900px) {
+    position: static;
+    order: 2;
+  }
+
+  &__inner {
     background: var(--clr-bg-body);
-    border: 1px solid rgba(0,0,0,0.05);
+    border: 1px solid rgba(0, 0, 0, 0.05);
     border-radius: 16px;
     padding: 24px;
-    box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-}
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  }
 
-.cert-sidebar__title {
+  &__title {
     font-size: 1.1rem;
     font-weight: 800;
     margin-top: 0;
@@ -92,310 +106,333 @@
     padding-bottom: 16px;
     border-bottom: 1px solid var(--clr-border);
     color: var(--clr-primary);
+  }
+
+  &__contact {
+    margin-top: 30px;
+    padding-top: 24px;
+    border-top: 1px solid var(--clr-border);
+    text-align: center;
+
+    p {
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      color: var(--clr-text-muted);
+    }
+  }
 }
 
-/* Меню навигации */
+.cert-content {
+  border-radius: 24px;
+}
+
 .cert-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 
-.cert-menu__link {
+  &__link {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
     text-decoration: none;
-    color: var(--clr-text-muted);
+    color: var(--clr-primary);
     font-weight: 600;
     font-size: 0.95rem;
     border-radius: 8px;
     transition: all 0.2s ease;
     background: transparent;
-}
 
-.cert-menu__icon {
+    &:hover {
+      background: #f8fafc;
+      color: var(--clr-primary);
+
+      .cert-menu__icon {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    &:visited {
+      color: var(--clr-primary);
+    }
+
+    &.active {
+      border: 2px solid var(--clr-accent);
+      color: var(--clr-primary);
+      box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+
+      .cert-menu__icon {
+        opacity: 1;
+        color: var(--clr-primary);
+      }
+    }
+  }
+
+  &__icon {
     opacity: 0;
     transform: translateX(-5px);
     transition: all 0.2s ease;
     color: inherit;
+  }
 }
 
-/* Ховер на ссылку */
-.cert-menu__link:hover {
-    background: #f8fafc; /* Очень светлый серый */
-    color: var(--clr-primary);
-}
 
-.cert-menu__link:hover .cert-menu__icon {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Активная ссылка (текущая страница) */
-.cert-menu__link.active {
-    border: 2px solid var(--clr-accent); /* Зеленый */
-    color: var(--clr-primary);
-    box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
-}
-
-.cert-menu__link.active .cert-menu__icon {
-    opacity: 1;
-    color: var(--clr-primary);
-}
-
-/* Контактный блок в сайдбаре */
-.cert-sidebar__contact {
-    margin-top: 30px;
-    padding-top: 24px;
-    border-top: 1px solid var(--clr-border);
-    text-align: center;
-}
-
-.cert-sidebar__contact p {
-    font-size: 0.9rem;
-    margin-bottom: 12px;
-    color: var(--clr-text-muted);
-}
-
-/* --- 4. КОНТЕНТ (Правая колонка) --- */
-.cert-article {
-    background: var(--clr-bg-body);
-    padding: 50px;
-    border-radius: 24px;
-    border: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.03);
-}
-
-/* Хлебные крошки */
+// BREADCRUMBS
 .breadcrumbs {
-    font-size: 0.9rem;
-    color: var(--clr-text-muted);
-    margin-bottom: 24px;
-    display: flex;
-    gap: 8px;
-}
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+  display: flex;
+  gap: 8px;
 
-.breadcrumbs a {
-    color: var(--clr-text-muted);
+  a,
+  span {
+    color: var(--clr-primary);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: border 0.2s;
-}
+  }
 
-.breadcrumbs a:hover {
+  a:hover {
     border-color: var(--clr-accent);
-    color: var(--clr-primary);
+    color: var(--clr-accent);
+  }
 }
 
-/* Заголовок статьи */
-.cert-article__title {
+
+// CERT ARTICLE
+.cert-article {
+  background: var(--clr-bg-body);
+  padding: 50px;
+  border-radius: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.03);
+
+  @media (max-width: 900px) {
+    padding: 24px;
+  }
+
+  &__title {
     font-size: 2.5rem;
     font-weight: 800;
     color: var(--clr-primary);
     margin-top: 0;
     margin-bottom: 30px;
     line-height: 1.2;
+  }
+
+  &__header {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+
+  &__header-text {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  &__quote {
+    font-size: 20px;
+    color: #6c757d;
+    font-style: italic;
+    margin-top: 8px;
+  }
+
+  &__header-image {
+    flex: 0 0 35%;
+    max-width: 400px;
+
+    @media (max-width: 768px) {
+      flex: auto;
+      max-height: 300px;
+      margin: 0 auto;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+  }
 }
 
-/* --- ТИПОГРАФИКА КОНТЕНТА (User Content) --- */
-/* Стиль для текста, который ты пишешь в редакторе */
 .user-content {
-    color: #334155; /* Slate 700 */
-    line-height: 1.7;
-    font-size: 1.05rem;
-}
+  color: #334155;
+  line-height: 1.7;
+  font-size: 1.05rem;
 
-.user-content h2 {
+  h2 {
     font-size: 1.8rem;
     color: var(--clr-primary);
     margin-top: 40px;
     margin-bottom: 20px;
     font-weight: 700;
-}
+  }
 
-.user-content h3 {
+  h3 {
     font-size: 1.4rem;
     color: var(--clr-primary);
     margin-top: 30px;
     margin-bottom: 16px;
     font-weight: 600;
-}
+  }
 
-.user-content p {
+  p {
     margin-bottom: 20px;
-}
+  }
 
-/* Списки с галочками */
-.user-content ul {
+  ul {
     margin-bottom: 24px;
-    padding-left: 0; /* Убираем стандартный отступ */
-    list-style: none; /* Убираем стандартные точки */
+    padding-left: 0;
+    list-style: none;
+
+    li {
+      position: relative;
+      padding-left: 30px;
+      margin-bottom: 12px;
+
+      &::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--clr-accent);
+        font-weight: 800;
+        font-size: 1.1em;
+      }
+    }
+  }
 }
 
-.user-content ul li {
-    position: relative;
-    padding-left: 30px; /* Место под галочку */
-    margin-bottom: 12px;
-}
-
-.user-content ul li::before {
-    content: '✓'; /* Галочка */
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: var(--clr-accent); /* Зеленая */
-    font-weight: 800;
-    font-size: 1.1em;
-}
-
-/* --- 5. БЛОК CTA (Призыв к действию) --- */
 .cert-cta-block {
-    margin-top: 60px;
-    padding: 40px;
-    background: #f1f5f9; /* Светло-серый фон */
-    border-radius: 16px;
-    border: 1px dashed var(--clr-border); /* Пунктирная рамка */
-    text-align: center;
-}
+  margin-top: 60px;
+  padding: 40px;
+  background: #f1f5f9;
+  border-radius: 16px;
+  border: 1px dashed var(--clr-border);
+  text-align: center;
 
-.cert-cta-block h3 {
+  h3 {
     margin-top: 0;
     font-size: 1.5rem;
     color: var(--clr-primary);
     margin-bottom: 10px;
-}
+  }
 
-.cert-cta-block p {
+  p {
     color: var(--clr-text-muted);
     margin-bottom: 24px;
-}
+  }
 
-/* --- АДАПТИВ (Мобильная версия) --- */
-@media (max-width: 900px) {
-    .cert-layout {
-        grid-template-columns: 1fr; /* Одна колонка */
-        gap: 30px;
-    }
-
-    .cert-sidebar {
-        position: static; /* Убираем липкость */
-        order: 2; /* Сайдбар под контентом (или order: -1 чтобы над) */
-        /* Обычно навигацию лучше оставить сверху, если она компактная, 
-           но если длинная - лучше вниз */
-    }
-
-    .cert-article {
-        padding: 24px; /* Меньше отступы внутри */
-    }
-
-    .page-hero {
-        min-height: 300px;
-        padding-top: 120px;
-    }
-
-    .page-hero__title {
-        font-size: 2rem;
-    }
-}
-
-
-
-/* --- Блок переваг (Benefits Section) --- */
-.benefits-section {
-    margin: 40px 0;
-    padding-top: 20px;
-    border-top: 1px solid rgba(0,0,0,0.05);
-}
-
-.benefits-intro {
-    background: rgba(30, 111, 92, 0.05); /* Дуже світлий зелений фон */
-    border-left: 4px solid var(--clr-accent);
-    padding: 20px;
-    margin-bottom: 30px;
-    border-radius: 0 12px 12px 0;
-    
-    p {
-        font-size: 1.05rem;
-        line-height: 1.6;
-        color: #334155;
-        margin: 0;
-    }
-    
-    strong {
-        color: var(--clr-accent);
-    }
-}
-
-.benefits-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-/* Картка однієї переваги */
-.benefit-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.6); /* Glass effect */
-    border: 1px solid rgba(226, 232, 240, 0.8);
-    border-radius: 16px;
+  a {
+    border: 1px solid var(--clr-primary);
+    padding: 12px 24px;
+    border-radius: 20px;
     transition: all 0.3s ease;
 
     &:hover {
-        background: #fff;
-        transform: translateX(5px); /* Легкий зсув вправо */
-        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        border-color: var(--clr-accent);
+      border-color: var(--clr-accent);
+      background-color: var(--clr-bg-body);
+      color: var(--clr-accent);
     }
+  }
 }
 
-/* Іконка галочки */
-.benefit-icon {
-    flex-shrink: 0;
-    width: 32px;
-    height: 32px;
-    background: linear-gradient(135deg, var(--clr-accent) 0%, #2ecc71 100%); /* Градієнт */
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    box-shadow: 0 4px 10px rgba(46, 204, 113, 0.3);
 
-    svg {
-        width: 18px;
-        height: 18px;
-    }
+// BENEFITS SECTION
+.benefits-section {
+  margin: 40px 0;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.benefits-intro {
+  background: rgba(255, 255, 255, 0.6);
+  border-left: 4px solid var(--clr-accent);
+  padding: 20px;
+  margin-bottom: 30px;
+  border-radius: 0 12px 12px 0;
+
+  p {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #334155;
+    margin: 0;
+  }
+
+  strong {
+    color: var(--clr-accent);
+  }
+}
+
+.benefits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 16px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: var(--clr-accent);
+  }
+}
+
+.benefit-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #aab1b9 0%, #2c3e50 100%);
+  border-radius: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+
+  svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 3px;
+  }
 }
 
 .benefit-content {
-    h4 {
-        margin: 0 0 6px 0;
-        font-size: 1.1rem;
-        font-weight: 700;
-        color: var(--clr-primary);
-    }
+  h4 {
+    margin: 0 0 6px 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--clr-primary);
+  }
 
-    p {
-        margin: 0;
-        font-size: 0.95rem;
-        line-height: 1.5;
-        color: #64748B;
-    }
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #64748b;
+  }
 }
 
-/* Висновок внизу */
 .benefits-conclusion {
-    margin-top: 30px;
-    text-align: center;
-    
-    p {
-        font-size: 1.1rem;
-        color: var(--clr-primary);
-        margin: 0;
-    }
+  margin-top: 30px;
+  text-align: center;
+
+  p {
+    font-size: 1.1rem;
+    color: var(--clr-primary);
+    margin: 0;
+  }
 }

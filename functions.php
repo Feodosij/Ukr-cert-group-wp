@@ -51,6 +51,7 @@ function ukr_cert_group_setup() {
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
         'primary' => __( 'Main Menu', 'ucg' ),
+        'footer_menu' => __( 'Footer menu', 'ucg' )
     ) );
 
 	/*
@@ -246,17 +247,17 @@ add_filter('script_loader_tag', 'add_module_type_attribute', 10, 3);
 
 function create_certifications_cpt() {
     $labels = array(
-        'name' => 'Сертифікації',
-        'singular_name' => 'Сертифікація',
-        'add_new' => 'Додати стандарт',
-        'add_new_item' => 'Додати новий стандарт (напр. ISO 9001)',
-        'edit_item' => 'Редагувати стандарт',
+        'name' => 'Сертификации',
+        'singular_name' => 'Сертификация',
+        'add_new' => 'Добавить стандарт',
+        'add_new_item' => 'Добавить новый стандарт (напр. ISO 9001)',
+        'edit_item' => 'Редактировать стандарт',
         'new_item' => 'Новий стандарт',
-        'view_item' => 'Переглянути',
-        'search_items' => 'Пошук стандартів',
-        'not_found' => 'Стандартів не знайдено',
-        'not_found_in_trash' => 'В кошику пусто',
-        'menu_name' => 'Сертифікації',
+        'view_item' => 'Посмотреть',
+        'search_items' => 'Поиск стандартов',
+        'not_found' => 'Стандартов не найдено',
+        'not_found_in_trash' => 'В корзине пусто',
+        'menu_name' => 'Сертификации',
     );
 
     $args = array(
@@ -279,3 +280,129 @@ function create_certifications_cpt() {
     register_post_type( 'certifications', $args );
 }
 add_action( 'init', 'create_certifications_cpt' );
+
+// ACF: Options Page «Настройка сайта»
+add_action( 'acf/init', function () {
+    if ( function_exists( 'acf_add_options_page' ) ) {
+        acf_add_options_page( array(
+            'page_title'  => 'Настройка сайта',
+            'menu_title'  => 'Настройка сайта',
+            'menu_slug'   => 'site-settings',
+            'capability'  => 'manage_options',
+            'position'    => '6',
+            'icon_url'    => 'dashicons-admin-settings',
+            'redirect'    => false,
+        ) );
+    }
+} );
+
+// ACF: зберігати JSON у папці теми
+add_filter( 'acf/settings/save_json', function () {
+    return get_template_directory() . '/acf-json';
+} );
+
+// ACF: завантажувати JSON із папки теми
+add_filter( 'acf/settings/load_json', function ( $paths ) {
+    $paths[] = get_template_directory() . '/acf-json';
+    return $paths;
+} );
+
+// Оборачиваем <table> в скроллируемый контейнер
+add_filter( 'the_content', function ( $content ) {
+    return preg_replace(
+        '/<table/i',
+        '<div class="table-responsive" style="overflow-x: auto;"><table',
+        preg_replace(
+            '/<\/table>/i',
+            '</table></div>',
+            $content
+        )
+    );
+} );
+
+
+// Регистрируем шорткод для вывода таблицы ACF
+add_shortcode( 'custom_acf_table', 'render_acf_table_shortcode' );
+
+function render_acf_table_shortcode( $atts ) {
+    $atts = shortcode_atts( array(
+        'field' => 'costom_table', 
+    ), $atts );
+
+    $table = get_field( $atts['field'], get_the_ID() );
+
+    if ( empty( $table ) ) {
+        return '';
+    }
+
+    ob_start();
+    ?>
+    
+    <div class="custom-table-wrapper glass-panel">
+        <table class="custom-table">
+            
+            <?php if ( ! empty( $table['caption'] ) ) : ?>
+                <caption><?php echo esc_html( $table['caption'] ); ?></caption>
+            <?php endif; ?>
+
+            <?php if ( ! empty( $table['header'] ) ) : ?>
+                <thead>
+                    <tr>
+                        <?php foreach ( $table['header'] as $th ) : ?>
+                            <th><?php echo esc_html( $th['c'] ); ?></th>
+                        <?php endforeach; ?>
+                    </tr>
+                </thead>
+            <?php endif; ?>
+
+            <?php if ( ! empty( $table['body'] ) ) : ?>
+                <tbody>
+                    <?php foreach ( $table['body'] as $tr ) : ?>
+                        <tr>
+                            <?php foreach ( $tr as $td ) : ?>
+                                <td><?php echo esc_html( $td['c'] ); ?></td>
+                            <?php endforeach; ?>
+                        </tr>
+                    <?php endforeach; ?>
+                </tbody>
+            <?php endif; ?>
+
+        </table>
+    </div>
+
+    <?php
+    // Возвращаем собранный HTML-код
+    return ob_get_clean();
+}
+
+
+function custom_cyrillic_transliterate( $title ) {
+    $cyrillic = array(
+        'а' => 'a',   'б' => 'b',   'в' => 'v',   'г' => 'h',   'ґ' => 'g',
+        'д' => 'd',   'е' => 'e',   'є' => 'ie',  'ж' => 'zh',  'з' => 'z',
+        'и' => 'y',   'і' => 'i',   'ї' => 'i',   'й' => 'i',   'к' => 'k',
+        'л' => 'l',   'м' => 'm',   'н' => 'n',   'о' => 'o',   'п' => 'p',
+        'р' => 'r',   'с' => 's',   'т' => 't',   'у' => 'u',   'ф' => 'f',
+        'х' => 'kh',  'ц' => 'ts',  'ч' => 'ch',  'ш' => 'sh',  'щ' => 'shch',
+        'ь' => '',    'ю' => 'iu',  'я' => 'ia',
+        
+        'А' => 'A',   'Б' => 'B',   'В' => 'V',   'Г' => 'H',   'Ґ' => 'G',
+        'Д' => 'D',   'Е' => 'E',   'Є' => 'Ye',  'Ж' => 'Zh',  'З' => 'Z',
+        'И' => 'Y',   'І' => 'I',   'Ї' => 'Yi',  'Й' => 'Y',   'К' => 'K',
+        'Л' => 'L',   'М' => 'M',   'Н' => 'N',   'О' => 'O',   'П' => 'P',
+        'Р' => 'R',   'С' => 'S',   'Т' => 'T',   'У' => 'U',   'Ф' => 'F',
+        'Х' => 'Kh',  'Ц' => 'Ts',  'Ч' => 'Ch',  'Ш' => 'Sh',  'Щ' => 'Shch',
+        'Ь' => '',    'Ю' => 'Yu',  'Я' => 'Ya',
+        
+        // Русские буквы (на всякий случай, если попадутся)
+        'ы' => 'y', 'ъ' => '', 'э' => 'e', 'ё' => 'yo',
+        'Ы' => 'Y', 'Ъ' => '', 'Э' => 'E', 'Ё' => 'Yo'
+    );
+
+    return strtr( $title, $cyrillic );
+}
+
+// Применяем фильтр к созданию ссылок постов
+add_filter( 'sanitize_title', 'custom_cyrillic_transliterate', 9 );
+// Применяем фильтр к названиям загружаемых файлов (картинок)
+add_filter( 'sanitize_file_name', 'custom_cyrillic_transliterate', 10 );
