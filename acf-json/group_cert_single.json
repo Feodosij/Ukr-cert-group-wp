@@ -1,0 +1,122 @@
+{
+    "key": "group_cert_single",
+    "title": "Сертифікація: Контент запису",
+    "fields": [
+        {
+            "key": "field_cs_cert_image",
+            "label": "Зображення сертифікації",
+            "name": "cert_image",
+            "type": "image",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "return_format": "array",
+            "preview_size": "medium",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_cs_cert_quote",
+            "label": "Оригінальна назва (цитата)",
+            "name": "cert_quote",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_cs_cert_intro",
+            "label": "Вступний текст",
+            "name": "cert_intro",
+            "type": "textarea",
+            "instructions": "Вступний абзац під заголовком Hero.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": 4,
+            "new_lines": ""
+        },
+        {
+            "key": "field_cs_cert_benefits",
+            "label": "Переваги",
+            "name": "cert_benefits",
+            "type": "repeater",
+            "instructions": "Список переваг сертифікації (пункти зі значком ✅).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {"width": "", "class": "", "id": ""},
+            "collapsed": "field_cs_sb_title",
+            "min": 0,
+            "max": 0,
+            "layout": "block",
+            "button_label": "Додати перевагу",
+            "sub_fields": [
+                {
+                    "key": "field_cs_sb_title",
+                    "label": "Заголовок переваги",
+                    "name": "sb_title",
+                    "type": "text",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {"width": "35", "class": "", "id": ""},
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_cs_sb_text",
+                    "label": "Опис переваги",
+                    "name": "sb_text",
+                    "type": "textarea",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {"width": "65", "class": "", "id": ""},
+                    "default_value": "",
+                    "placeholder": "",
+                    "maxlength": "",
+                    "rows": 2,
+                    "new_lines": ""
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "certifications"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1772323200
+}

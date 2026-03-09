@@ -1,0 +1,59 @@
+{
+    "key": "group_69ac36cf7b275",
+    "title": "Blog-post",
+    "fields": [
+        {
+            "key": "field_69ac36cfffd7c",
+            "label": "Таблица",
+            "name": "custom_table",
+            "aria-label": "",
+            "type": "table",
+            "instructions": "Чтобы вывести эту таблицу в тексте поста, вставьте этот шорткод: [custom_acf_table field=\"custom_table\"]",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "use_header": 0,
+            "use_caption": 2
+        },
+        {
+            "key": "field_69ac53d0a155b",
+            "label": "Ютуб видео",
+            "name": "youtube_video",
+            "aria-label": "",
+            "type": "oembed",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "width": "",
+            "height": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1772902406
+}

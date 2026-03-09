@@ -143,6 +143,15 @@ body {
  */
 a:where([class]) {
   display: inline-flex;
+  /* Наследуем цвет от родителя, чтобы убрать фиолетовый */
+  color: inherit; 
+  /* Убираем подчеркивание, если оно не нужно по дизайну */
+  text-decoration: none; 
+}
+
+/* На случай, если нужно сбросить состояние именно для посещенных */
+a:where([class]):visited {
+  color: inherit;
 }
 
 /**

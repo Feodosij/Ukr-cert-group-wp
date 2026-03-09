@@ -1,1 +1,0 @@
-{"version":3,"file":"main-DgB6AWf0.js","sources":["../../src/js/main.js"],"sourcesContent":["import '../scss/main.scss';\n\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  console.log('Vite + WordPress works');\n});"],"names":[],"mappings":"AAGA,SAAS,iBAAiB,mBAAoB,IAAM,CAClD,QAAQ,IAAI,wBAAwB,CACtC,CAAC"}
