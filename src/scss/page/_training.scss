@@ -2,10 +2,10 @@
 
 // TRAINING PAGE
 .training-page-wrapper {
-  padding: 60px 0;
+  padding-top: 60px;
 
   @media (max-width: $bp-md) {
-    padding: 40px 0;
+    padding-top: 40px;
   }
 }
 
@@ -139,7 +139,7 @@
 .training-contact {
   text-align: center;
   padding: 50px;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
 
   @media (max-width: $bp-md) {
@@ -183,11 +183,18 @@
     .btn {
       font-size: 1.1rem;
       padding: 16px 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     .btn--outline {
       border: 2px solid var(--clr-primary);
       color: var(--clr-primary);
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-weight: 600;
       background: transparent;
       transition: background-color 0.3s ease, color 0.3s ease;
 

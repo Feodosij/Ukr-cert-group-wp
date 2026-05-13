@@ -109,7 +109,7 @@ $social_tiktok    = get_field( 'social_tiktok', 'option' );
 
         <div class="footer-bottom">
             <p class="footer-copyright">
-                &copy; <?php echo date( 'Y' ); ?> <span> Всі права захищено.</span>
+                &copy; <?php echo date( 'Y' ); ?> <span style="margin-left: 4px;"> Всі права захищено.</span>
                 <a href="<?php echo esc_url( home_url( '/privacy-policy/' ) ); ?>">Політика конфіденційності</a>
             </p>
         </div>

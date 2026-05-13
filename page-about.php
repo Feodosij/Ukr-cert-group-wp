@@ -187,15 +187,16 @@ $hero_desc = get_field( 'about_hero_desc' );
                         <a href="tel:<?php echo esc_attr( $phone_href ); ?>" class="btn btn--hero">📞 <?php echo esc_html( $phone ); ?></a>
                     <?php endif; ?>
                     <?php if ( $email ) : ?>
-                        <a href="mailto:<?php echo esc_attr( $email ); ?>" class="btn btn--outline">✉️ <?php echo esc_html( $email ); ?></a>
+                        <a href="mailto:<?php echo esc_attr( $email ); ?>" class="btn btn--outline">📧 <?php echo esc_html( $email ); ?></a>
                     <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
 
-        <?php get_template_part( 'template-parts/contact-section' ); ?>
-
     </div>
 </div>
+
+<?php get_template_part( 'template-parts/contact-section' ); ?>
+
 </main>
 <?php get_footer(); ?>

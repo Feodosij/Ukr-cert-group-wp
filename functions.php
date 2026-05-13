@@ -273,13 +273,70 @@ function create_certifications_cpt() {
         'hierarchical' => false,
         'menu_position' => 5,
         'menu_icon' => 'dashicons-awards',
-		'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail' ),        
+		'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail', 'page-attributes' ),        
         'show_in_rest' => true,
     );
 
     register_post_type( 'certifications', $args );
 }
 add_action( 'init', 'create_certifications_cpt' );
+
+// Drag-and-drop sorting for certifications in admin
+function ucg_certifications_admin_order() {
+    add_action( 'admin_enqueue_scripts', function ( $hook ) {
+        if ( $hook !== 'edit.php' || ( $_GET['post_type'] ?? '' ) !== 'certifications' ) {
+            return;
+        }
+        wp_enqueue_script( 'jquery-ui-sortable' );
+        wp_add_inline_script( 'jquery-ui-sortable', '
+            jQuery(function($){
+                var $tbody = $("table.wp-list-table tbody#the-list");
+                if (!$tbody.length) return;
+                $tbody.sortable({
+                    axis: "y",
+                    handle: "td",
+                    cursor: "grabbing",
+                    placeholder: "ui-sortable-placeholder",
+                    opacity: 0.7,
+                    update: function(){
+                        var order = [];
+                        $tbody.find("tr").each(function(i){
+                            order.push($(this).attr("id").replace("post-","") + ":" + i);
+                        });
+                        $.post(ajaxurl, {
+                            action: "ucg_sort_certifications",
+                            order: order.join(","),
+                            _ajax_nonce: "' . wp_create_nonce( 'ucg_sort_certs' ) . '"
+                        });
+                    }
+                });
+                $tbody.find("td").css("cursor","grab");
+            });
+        ' );
+        wp_add_inline_style( 'wp-admin', '
+            .ui-sortable-placeholder { height: 60px; background: #fef9c3 !important; visibility: visible !important; }
+        ' );
+    });
+
+    add_action( 'wp_ajax_ucg_sort_certifications', function () {
+        check_ajax_referer( 'ucg_sort_certs' );
+        $order = sanitize_text_field( $_POST['order'] ?? '' );
+        foreach ( explode( ',', $order ) as $item ) {
+            list( $id, $pos ) = explode( ':', $item );
+            wp_update_post( array( 'ID' => absint( $id ), 'menu_order' => absint( $pos ) ) );
+        }
+        wp_send_json_success();
+    });
+}
+ucg_certifications_admin_order();
+
+function ucg_certifications_default_orderby( $query ) {
+    if ( is_admin() && $query->is_main_query() && ( $query->get( 'post_type' ) === 'certifications' ) && ! $query->get( 'orderby' ) ) {
+        $query->set( 'orderby', 'menu_order' );
+        $query->set( 'order', 'ASC' );
+    }
+}
+add_action( 'pre_get_posts', 'ucg_certifications_default_orderby' );
 
 // ACF: Options Page «Настройка сайта»
 add_action( 'acf/init', function () {
