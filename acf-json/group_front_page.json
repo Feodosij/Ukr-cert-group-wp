@@ -186,6 +186,23 @@
                     "append": "",
                     "maxlength": "",
                     "parent_repeater": "field_fp_hero_cards"
+                },
+                {
+                    "key": "field_6a08f7f7d4adc",
+                    "label": "Ссылка карточки",
+                    "name": "hero_card_link",
+                    "aria-label": "",
+                    "type": "link",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "array",
+                    "parent_repeater": "field_fp_hero_cards"
                 }
             ]
         },
@@ -716,5 +733,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1772843013
+    "modified": 1778972729
 }

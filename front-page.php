@@ -49,12 +49,8 @@ if ( $hero_title ) :
                         <?php if ( $hero_form_subtitle ) : ?>
                             <p class="request-card__subtitle"><?php echo esc_html( $hero_form_subtitle ); ?></p>
                         <?php endif; ?>
-
-                        <form class="hero-form-vertical">
-                            <input type="text" placeholder="Ваше ім'я" class="input-glass">
-                            <input type="tel" placeholder="+38 (0__) ___ __ __" class="input-glass">
-                            <button type="submit" class="btn btn--hero btn--full">Отримати консультацію</button>
-                        </form>
+                        
+                        <?php echo do_shortcode( '[contact-form-7 id="be93a85" html_class="hero-form-vertical"]' ); ?>
                     </div>
                 </div>
 
@@ -65,15 +61,19 @@ if ( $hero_title ) :
                     <?php while ( have_rows( 'hero_cards' ) ) : the_row();
                         $card_icon  = get_sub_field( 'hero_card_icon' );
                         $card_title = get_sub_field( 'hero_card_title' );
-                        if ( $card_title ) : ?>
-                            <div class="hero-card">
+                        $card_link  = get_sub_field( 'hero_card_link' );
+                        $link_url   = is_array( $card_link ) ? $card_link['url'] : $card_link;
+                        $link_target = is_array( $card_link ) && ! empty( $card_link['target'] ) ? $card_link['target'] : '';
+                        if ( $card_title ) :
+                            $tag = $link_url ? 'a' : 'div'; ?>
+                            <<?php echo $tag; ?> class="hero-card"<?php if ( $link_url ) : ?> href="<?php echo esc_url( $link_url ); ?>"<?php endif; ?><?php if ( $link_target ) : ?> target="<?php echo esc_attr( $link_target ); ?>" rel="noopener"<?php endif; ?>>
                                 <?php if ( $card_icon ) : ?>
                                     <div class="hero-card__icon">
                                         <img src="<?php echo esc_url( $card_icon['url'] ); ?>" alt="<?php echo esc_attr( $card_icon['alt'] ); ?>">
                                     </div>
                                 <?php endif; ?>
                                 <h3 class="hero-card__title"><?php echo esc_html( $card_title ); ?></h3>
-                            </div>
+                            </<?php echo $tag; ?>>
                         <?php endif;
                     endwhile; ?>
                 </div>
@@ -140,7 +140,7 @@ if ( $why_title ) :
                         if ( $wcard_title ) : ?>
                             <div class="why-card glass-panel">
                                 <?php if ( $wcard_icon ) : ?>
-                                    <img class="why-card__icon" src="<?php echo esc_url( $wcard_icon['url'] ); ?>" alt="<?php echo esc_attr( $wcard_icon['alt'] ); ?>">
+                                    <img class="why-card__icon" src="<?php echo esc_url( $wcard_icon['url'] ); ?>" alt="<?php echo esc_attr( $wcard_icon['alt'] ); ?>" loading="lazy">
                                 <?php endif; ?>
                                 <div class="why-content">
                                     <h3><?php echo esc_html( $wcard_title ); ?></h3>
@@ -192,7 +192,7 @@ if ( $cert_title ) :
                 <?php if ( $cert_image ) : ?>
                     <div class="cert-top-image">
                         <img src="<?php echo esc_url( $cert_image['url'] ); ?>"
-                             alt="<?php echo esc_attr( $cert_image['alt'] ?: $cert_title ); ?>">
+                             alt="<?php echo esc_attr( $cert_image['alt'] ?: $cert_title ); ?>" loading="lazy">
                     </div>
                 <?php endif; ?>
             </div>
@@ -248,7 +248,7 @@ if ( $services_title && have_rows( 'services' ) ) :
                     if ( $svc_title ) : ?>
                         <article class="service-item card">
                             <?php if ( $svc_icon ) : ?>
-                                <div class="service-item__icon-box"><img class="service-item__image" src="<?php echo esc_url( $svc_icon['url'] ); ?>" alt="<?php echo esc_attr( $svc_icon['alt'] ); ?>"></div>
+                                <div class="service-item__icon-box"><img class="service-item__image" src="<?php echo esc_url( $svc_icon['url'] ); ?>" alt="<?php echo esc_attr( $svc_icon['alt'] ); ?>" loading="lazy"></div>
                             <?php endif; ?>
                             <div class="service-item__content">
                                 <h3><?php echo esc_html( $svc_title ); ?></h3>

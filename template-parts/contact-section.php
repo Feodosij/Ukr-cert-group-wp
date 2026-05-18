@@ -49,38 +49,11 @@ $form_note = get_field( 'contact_form_note', 'option' );
             </div>
 
             <div class="contact-form-box">
-                <form action="#" method="POST" class="main-form">
+                <?php echo do_shortcode( '[contact-form-7 id="834f10f" html_class="main-form"]' ); ?>
 
-                    <div class="form-group">
-                        <label for="f-name">Ваше ім'я</label>
-                        <input type="text" id="f-name" name="name" class="form-input" placeholder="Олександр" required>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="f-phone">Телефон</label>
-                            <input type="tel" id="f-phone" name="phone" class="form-input" placeholder="+38 (0__) ___ __ __" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="f-email">Email</label>
-                            <input type="email" id="f-email" name="email" class="form-input" placeholder="mail@example.com">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="f-message">Коментар</label>
-                        <textarea id="f-message" name="message" class="form-input" rows="4" placeholder="Текст повідомлення..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn--hero btn--full-width">
-                        <?php echo esc_html( $btn_text ); ?>
-                    </button>
-
-                    <?php if ( $form_note ) : ?>
-                        <p class="form-note"><?php echo esc_html( $form_note ); ?></p>
-                    <?php endif; ?>
-
-                </form>
+                <?php if ( $form_note ) : ?>
+                    <p class="form-note"><?php echo esc_html( $form_note ); ?></p>
+                <?php endif; ?>
             </div>
 
         </div>

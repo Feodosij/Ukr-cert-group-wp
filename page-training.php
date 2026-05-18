@@ -44,7 +44,7 @@ $hero_desc = get_field( 'training_hero_desc' );
                         <div class="training-card__header">
                             <?php if ( $card_icon ) : ?>
                                 <div class="training-icon">
-                                    <img src="<?php echo esc_url( $card_icon['url'] ); ?>" alt="<?php echo esc_attr( $card_icon['alt'] ); ?>">
+                                    <img src="<?php echo esc_url( $card_icon['url'] ); ?>" alt="<?php echo esc_attr( $card_icon['alt'] ); ?>" loading="lazy">
                                 </div>
                             <?php endif; ?>
                             <h2 class="training-title"><?php echo esc_html( $card_title ); ?></h2>
@@ -100,15 +100,16 @@ $hero_desc = get_field( 'training_hero_desc' );
                         <a href="tel:<?php echo esc_attr( $phone_href ); ?>" class="btn btn--hero">📞 <?php echo esc_html( $phone ); ?></a>
                     <?php endif; ?>
                     <?php if ( $email ) : ?>
-                        <a href="mailto:<?php echo esc_attr( $email ); ?>" class="btn btn--outline">✉️ <?php echo esc_html( $email ); ?></a>
+                        <a href="mailto:<?php echo esc_attr( $email ); ?>" class="btn btn--outline">📧 <?php echo esc_html( $email ); ?></a>
                     <?php endif; ?>
                 </div>
             </div>
         <?php endif; ?>
 
-        <?php get_template_part( 'template-parts/contact-section' ); ?>
-
     </div>
 </div>
+
+<?php get_template_part( 'template-parts/contact-section' ); ?>
+
 </main>
 <?php get_footer(); ?>

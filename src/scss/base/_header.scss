@@ -25,7 +25,7 @@
         line-height: 0;
 
         &:hover .logo-image {
-            opacity: 0.8;
+            opacity: 1;
         }
     }
 }
@@ -75,6 +75,10 @@
 
         &:hover {
             color: #ffffff;
+        }
+
+        &:focus-visible {
+            outline: none;
         }
 
         &::after {
@@ -183,7 +187,7 @@
     z-index: 105;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     overflow-y: auto;
     opacity: 0;
     visibility: hidden;
@@ -236,7 +240,7 @@
     }
 
     &__footer {
-        padding: 0 32px 40px;
+        display: none;
     }
 }
 
@@ -257,6 +261,8 @@
 // OPEN STATE
 .site-header.is-menu-open {
     .burger__line {
+        background-color: var(--clr-primary);
+
         &:nth-child(1) {
             transform: translateY(9px) rotate(45deg);
         }

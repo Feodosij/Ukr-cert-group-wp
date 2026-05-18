@@ -2,10 +2,10 @@
 
 // ABOUT PAGE
 .about-page-wrapper {
-  padding: 60px 0;
+  padding-top: 60px;
 
   @media (max-width: $bp-md) {
-    padding: 40px 0;
+    padding-top: 40px;
   }
 }
 
@@ -256,6 +256,8 @@
 .about-cta {
   text-align: center;
   padding: 50px;
+  max-width: 1000px;
+  margin: 0 auto;
 
   @media (max-width: $bp-md) {
     padding: 32px 24px;
@@ -298,6 +300,9 @@
     padding: 12px 24px;
     border-radius: 8px;
     font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 
     &:hover {
       background: var(--clr-primary);

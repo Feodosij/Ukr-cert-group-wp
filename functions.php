@@ -273,13 +273,70 @@ function create_certifications_cpt() {
         'hierarchical' => false,
         'menu_position' => 5,
         'menu_icon' => 'dashicons-awards',
-		'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail' ),        
+		'supports' => array( 'title', 'editor', 'excerpt', 'custom-fields', 'thumbnail', 'page-attributes' ),        
         'show_in_rest' => true,
     );
 
     register_post_type( 'certifications', $args );
 }
 add_action( 'init', 'create_certifications_cpt' );
+
+// Drag-and-drop sorting for certifications in admin
+function ucg_certifications_admin_order() {
+    add_action( 'admin_enqueue_scripts', function ( $hook ) {
+        if ( $hook !== 'edit.php' || ( $_GET['post_type'] ?? '' ) !== 'certifications' ) {
+            return;
+        }
+        wp_enqueue_script( 'jquery-ui-sortable' );
+        wp_add_inline_script( 'jquery-ui-sortable', '
+            jQuery(function($){
+                var $tbody = $("table.wp-list-table tbody#the-list");
+                if (!$tbody.length) return;
+                $tbody.sortable({
+                    axis: "y",
+                    handle: "td",
+                    cursor: "grabbing",
+                    placeholder: "ui-sortable-placeholder",
+                    opacity: 0.7,
+                    update: function(){
+                        var order = [];
+                        $tbody.find("tr").each(function(i){
+                            order.push($(this).attr("id").replace("post-","") + ":" + i);
+                        });
+                        $.post(ajaxurl, {
+                            action: "ucg_sort_certifications",
+                            order: order.join(","),
+                            _ajax_nonce: "' . wp_create_nonce( 'ucg_sort_certs' ) . '"
+                        });
+                    }
+                });
+                $tbody.find("td").css("cursor","grab");
+            });
+        ' );
+        wp_add_inline_style( 'wp-admin', '
+            .ui-sortable-placeholder { height: 60px; background: #fef9c3 !important; visibility: visible !important; }
+        ' );
+    });
+
+    add_action( 'wp_ajax_ucg_sort_certifications', function () {
+        check_ajax_referer( 'ucg_sort_certs' );
+        $order = sanitize_text_field( $_POST['order'] ?? '' );
+        foreach ( explode( ',', $order ) as $item ) {
+            list( $id, $pos ) = explode( ':', $item );
+            wp_update_post( array( 'ID' => absint( $id ), 'menu_order' => absint( $pos ) ) );
+        }
+        wp_send_json_success();
+    });
+}
+ucg_certifications_admin_order();
+
+function ucg_certifications_default_orderby( $query ) {
+    if ( is_admin() && $query->is_main_query() && ( $query->get( 'post_type' ) === 'certifications' ) && ! $query->get( 'orderby' ) ) {
+        $query->set( 'orderby', 'menu_order' );
+        $query->set( 'order', 'ASC' );
+    }
+}
+add_action( 'pre_get_posts', 'ucg_certifications_default_orderby' );
 
 // ACF: Options Page «Настройка сайта»
 add_action( 'acf/init', function () {
@@ -406,3 +463,131 @@ function custom_cyrillic_transliterate( $title ) {
 add_filter( 'sanitize_title', 'custom_cyrillic_transliterate', 9 );
 // Применяем фильтр к названиям загружаемых файлов (картинок)
 add_filter( 'sanitize_file_name', 'custom_cyrillic_transliterate', 10 );
+
+// CPT: Заявки (Leads)
+function ucg_register_leads_cpt() {
+    register_post_type( 'leads', array(
+        'labels' => array(
+            'name'               => 'Заявки',
+            'singular_name'      => 'Заявка',
+            'add_new'            => 'Додати заявку',
+            'add_new_item'       => 'Нова заявка',
+            'edit_item'          => 'Переглянути заявку',
+            'view_item'          => 'Переглянути',
+            'search_items'       => 'Пошук заявок',
+            'not_found'          => 'Заявок не знайдено',
+            'not_found_in_trash' => 'В кошику порожньо',
+            'menu_name'          => 'Заявки',
+        ),
+        'public'              => false,
+        'show_ui'             => true,
+        'show_in_menu'        => true,
+        'menu_position'       => 6,
+        'menu_icon'           => 'dashicons-email-alt',
+        'supports'            => array( 'title' ),
+        'capability_type'     => 'post',
+        'capabilities'        => array(
+            'create_posts' => 'do_not_allow',
+        ),
+        'map_meta_cap'        => true,
+    ) );
+}
+add_action( 'init', 'ucg_register_leads_cpt' );
+
+function ucg_leads_meta_box() {
+    add_meta_box(
+        'ucg_lead_details',
+        'Деталі заявки',
+        'ucg_render_lead_meta_box',
+        'leads',
+        'normal',
+        'high'
+    );
+}
+add_action( 'add_meta_boxes', 'ucg_leads_meta_box' );
+
+function ucg_render_lead_meta_box( $post ) {
+    $phone   = get_post_meta( $post->ID, '_lead_phone', true );
+    $email   = get_post_meta( $post->ID, '_lead_email', true );
+    $message = get_post_meta( $post->ID, '_lead_message', true );
+    $source  = get_post_meta( $post->ID, '_lead_source', true );
+    ?>
+    <table class="form-table">
+        <tr>
+            <th>Телефон</th>
+            <td><?php echo esc_html( $phone ); ?></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><?php echo esc_html( $email ?: '—' ); ?></td>
+        </tr>
+        <tr>
+            <th>Повідомлення</th>
+            <td><?php echo nl2br( esc_html( $message ?: '—' ) ); ?></td>
+        </tr>
+        <tr>
+            <th>Джерело</th>
+            <td><?php echo esc_html( $source ); ?></td>
+        </tr>
+    </table>
+    <?php
+}
+
+function ucg_leads_columns( $columns ) {
+    $new = array();
+    $new['cb']           = $columns['cb'];
+    $new['title']        = "Ім'я";
+    $new['lead_phone']   = 'Телефон';
+    $new['lead_email']   = 'Email';
+    $new['lead_source']  = 'Джерело';
+    $new['date']         = 'Дата';
+    return $new;
+}
+add_filter( 'manage_leads_posts_columns', 'ucg_leads_columns' );
+
+function ucg_leads_column_data( $column, $post_id ) {
+    switch ( $column ) {
+        case 'lead_phone':
+            echo esc_html( get_post_meta( $post_id, '_lead_phone', true ) );
+            break;
+        case 'lead_email':
+            echo esc_html( get_post_meta( $post_id, '_lead_email', true ) ?: '—' );
+            break;
+        case 'lead_source':
+            $source = get_post_meta( $post_id, '_lead_source', true );
+            echo esc_html( $source === 'hero' ? 'Головна (hero)' : 'Контактна форма' );
+            break;
+    }
+}
+add_action( 'manage_leads_posts_custom_column', 'ucg_leads_column_data', 10, 2 );
+
+// Save CF7 submissions as Leads
+function ucg_cf7_save_lead( $contact_form ) {
+    $submission = WPCF7_Submission::get_instance();
+    if ( ! $submission ) {
+        return;
+    }
+
+    $data    = $submission->get_posted_data();
+    $name    = sanitize_text_field( $data['your-name'] ?? '' );
+    $phone   = sanitize_text_field( $data['your-phone'] ?? '' );
+    $email   = sanitize_email( $data['your-email'] ?? '' );
+    $message = sanitize_textarea_field( $data['your-message'] ?? '' );
+
+    $form_title = $contact_form->title();
+    $source = ( stripos( $form_title, 'hero' ) !== false ) ? 'hero' : 'contact';
+
+    $post_id = wp_insert_post( array(
+        'post_type'   => 'leads',
+        'post_title'  => $name ?: 'Без імені',
+        'post_status' => 'publish',
+    ) );
+
+    if ( $post_id && ! is_wp_error( $post_id ) ) {
+        update_post_meta( $post_id, '_lead_phone', $phone );
+        update_post_meta( $post_id, '_lead_email', $email );
+        update_post_meta( $post_id, '_lead_message', $message );
+        update_post_meta( $post_id, '_lead_source', $source );
+    }
+}
+add_action( 'wpcf7_mail_sent', 'ucg_cf7_save_lead' );

@@ -7,6 +7,9 @@
     <meta charset="<?php bloginfo( 'charset' ); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="https://gmpg.org/xfn/11">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
     <?php wp_head(); ?>
 </head>
 
@@ -43,7 +46,7 @@
             </nav>
 
             <div class="header-actions">
-                <a href="#contact" class="btn btn--small">Зв'язок</a>
+                <a href="<?php echo esc_url( home_url( '/#contact' ) ); ?>" class="btn btn--small" data-contact-link>Зв'язок</a>
             </div>
 
             <button class="burger" id="burger" aria-label="Відкрити меню" aria-expanded="false" aria-controls="mobile-menu">
@@ -63,7 +66,7 @@
                 'depth'          => 1,
             ) ); ?>
             <div class="mobile-menu__footer">
-                <a href="#contact" class="btn btn--small btn--full-width">Зв'язатись</a>
+                <a href="<?php echo esc_url( home_url( '/#contact' ) ); ?>" class="btn btn--small btn--full-width" data-contact-link>Зв'язатись</a>
             </div>
         </nav>
 
