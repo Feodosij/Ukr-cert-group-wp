@@ -44,7 +44,7 @@ $hero_desc = get_field( 'training_hero_desc' );
                         <div class="training-card__header">
                             <?php if ( $card_icon ) : ?>
                                 <div class="training-icon">
-                                    <img src="<?php echo esc_url( $card_icon['url'] ); ?>" alt="<?php echo esc_attr( $card_icon['alt'] ); ?>">
+                                    <img src="<?php echo esc_url( $card_icon['url'] ); ?>" alt="<?php echo esc_attr( $card_icon['alt'] ); ?>" loading="lazy">
                                 </div>
                             <?php endif; ?>
                             <h2 class="training-title"><?php echo esc_html( $card_title ); ?></h2>

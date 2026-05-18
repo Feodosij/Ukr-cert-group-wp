@@ -31,4 +31,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') closeMenu();
     });
 
+    document.querySelectorAll('[data-contact-link]').forEach(link => {
+        link.addEventListener('click', (e) => {
+            const section = document.getElementById('contact');
+            if (section) {
+                e.preventDefault();
+                closeMenu();
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+
 });

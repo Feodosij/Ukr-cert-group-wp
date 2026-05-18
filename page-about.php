@@ -60,7 +60,7 @@ $hero_desc = get_field( 'about_hero_desc' );
                     <div class="about-card__header">
                         <?php if ( is_array( $dir_icon ) && ! empty( $dir_icon['url'] ) ) : ?>
                             <div class="icon-box">
-                                <img src="<?php echo esc_url( $dir_icon['url'] ); ?>" alt="<?php echo esc_attr( $dir_icon['alt'] ); ?>">
+                                <img src="<?php echo esc_url( $dir_icon['url'] ); ?>" alt="<?php echo esc_attr( $dir_icon['alt'] ); ?>" loading="lazy">
                             </div>
                         <?php endif; ?>
                         <h3><?php echo esc_html( $dir_title ); ?></h3>
@@ -91,11 +91,11 @@ $hero_desc = get_field( 'about_hero_desc' );
                 $esg_icon = get_field( 'about_esg_icon' );
                 $esg_text = get_field( 'about_esg_text' );
             ?>
-                <section class="about-card glass-panel esg-card">
+                <section class="about-card glass-panel esg-card" id="esg-card">
                     <div class="about-card__header">
                         <?php if ( is_array( $esg_icon ) && ! empty( $esg_icon['url'] ) ) : ?>
                             <div class="icon-box">
-                                <img src="<?php echo esc_url( $esg_icon['url'] ); ?>" alt="<?php echo esc_attr( $esg_icon['alt'] ); ?>">
+                                <img src="<?php echo esc_url( $esg_icon['url'] ); ?>" alt="<?php echo esc_attr( $esg_icon['alt'] ); ?>" loading="lazy">
                             </div>
                         <?php endif; ?>
                         <h3><?php echo esc_html( $esg_title ); ?></h3>
@@ -151,7 +151,7 @@ $hero_desc = get_field( 'about_hero_desc' );
                                             <div class="benefit-number"><?php echo esc_html( $bvalue ); ?></div>
                                         <?php elseif ( is_array( $bimage ) && ! empty( $bimage['url'] ) ) : ?>
                                             <div class="benefit-icon benefit-icon--about">
-                                                <img src="<?php echo esc_url( $bimage['url'] ); ?>" alt="<?php echo esc_attr( $bimage['alt'] ); ?>">
+                                                <img src="<?php echo esc_url( $bimage['url'] ); ?>" alt="<?php echo esc_attr( $bimage['alt'] ); ?>" loading="lazy">
                                             </div>
                                         <?php endif; ?>
                                         <?php if ( $btext ) : ?><p><?php echo esc_html( $btext ); ?></p><?php endif; ?>
