@@ -591,3 +591,82 @@ function ucg_cf7_save_lead( $contact_form ) {
     }
 }
 add_action( 'wpcf7_mail_sent', 'ucg_cf7_save_lead' );
+
+if ( function_exists( 'acf_add_local_field_group' ) ) {
+    add_action( 'acf/init', function () {
+        acf_add_local_field_group( array(
+            'key'      => 'group_director_greeting',
+            'title'    => 'Блок: Звернення директора',
+            'fields'   => array(
+                array(
+                    'key'           => 'field_director_text',
+                    'label'         => 'Текст звернення',
+                    'name'          => 'director_text',
+                    'type'          => 'wysiwyg',
+                    'instructions'  => 'Весь контент: заголовки, абзаци, посилання на автора тощо',
+                    'tabs'          => 'all',
+                    'toolbar'       => 'full',
+                    'media_upload'  => 0,
+                ),
+                array(
+                    'key'     => 'field_director_video_source',
+                    'label'   => 'Джерело відео',
+                    'name'    => 'director_video_source',
+                    'type'    => 'select',
+                    'choices' => array(
+                        'file'    => 'Завантажити відео-файл',
+                        'youtube' => 'Посилання з YouTube',
+                    ),
+                    'default_value' => 'file',
+                    'allow_null'    => 1,
+                    'ui'            => 1,
+                ),
+                array(
+                    'key'              => 'field_director_video',
+                    'label'            => 'Відео-файл',
+                    'name'             => 'director_video',
+                    'type'             => 'file',
+                    'return_format'    => 'array',
+                    'mime_types'       => 'mp4,webm,mov',
+                    'conditional_logic' => array(
+                        array(
+                            array(
+                                'field'    => 'field_director_video_source',
+                                'operator' => '==',
+                                'value'    => 'file',
+                            ),
+                        ),
+                    ),
+                ),
+                array(
+                    'key'              => 'field_director_youtube',
+                    'label'            => 'YouTube URL',
+                    'name'             => 'director_youtube',
+                    'type'             => 'url',
+                    'instructions'     => 'Наприклад: https://www.youtube.com/watch?v=XXXXX',
+                    'conditional_logic' => array(
+                        array(
+                            array(
+                                'field'    => 'field_director_video_source',
+                                'operator' => '==',
+                                'value'    => 'youtube',
+                            ),
+                        ),
+                    ),
+                ),
+            ),
+            'location' => array(
+                array(
+                    array(
+                        'param'    => 'page_template',
+                        'operator' => '==',
+                        'value'    => 'page-about.php',
+                    ),
+                ),
+            ),
+            'position'     => 'normal',
+            'style'        => 'default',
+            'menu_order'   => 10,
+        ) );
+    } );
+}

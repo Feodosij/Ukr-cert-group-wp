@@ -50,6 +50,42 @@ $hero_desc = get_field( 'about_hero_desc' );
                 </section>
             <?php endif; ?>
 
+             <?php
+        $d_text     = get_field( 'director_text' );
+        $d_source   = get_field( 'director_video_source' );
+        $d_video    = get_field( 'director_video' );
+        $d_youtube  = get_field( 'director_youtube' );
+
+        if ( $d_text ) :
+            $has_file    = $d_source === 'file' && is_array( $d_video ) && ! empty( $d_video['url'] );
+            $has_youtube = $d_source === 'youtube' && $d_youtube;
+            $yt_id       = '';
+            if ( $has_youtube && preg_match( '/(?:youtu\.be\/|youtube\.com\/(?:watch\?.*v=|embed\/|shorts\/))([a-zA-Z0-9_-]{11})/', $d_youtube, $m ) ) {
+                $yt_id = $m[1];
+            }
+            $section_class = $has_file ? 'director--float' : 'director--wide';
+        ?>
+            <section class="director-greeting glass-panel <?php echo esc_attr( $section_class ); ?>">
+
+                <?php if ( $has_youtube && $yt_id ) : ?>
+                    <div class="director-greeting__youtube">
+                        <iframe src="https://www.youtube.com/embed/<?php echo esc_attr( $yt_id ); ?>" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                    </div>
+                <?php endif; ?>
+
+                <?php if ( $has_file ) : ?>
+                    <div class="director-greeting__video-float">
+                        <video controls playsinline preload="metadata">
+                            <source src="<?php echo esc_url( $d_video['url'] ); ?>" type="<?php echo esc_attr( $d_video['mime_type'] ); ?>">
+                        </video>
+                    </div>
+                <?php endif; ?>
+
+                <?php echo wp_kses_post( $d_text ); ?>
+
+            </section>
+        <?php endif; ?>
+
             <?php
             // DIRECTIONS CARD
             $dir_title = get_field( 'about_dir_title' );
