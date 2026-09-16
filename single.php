@@ -39,7 +39,18 @@ $hero_bg = get_the_post_thumbnail_url( get_the_ID(), 'full' );
                     <div class="video-wrapper">
                         <?php echo $video_iframe; ?>
                     </div>
-                <?php endif; ?>
+                <?php endif;
+
+                if ( have_rows( 'additional_youtube_videos' ) ) :
+                    while ( have_rows( 'additional_youtube_videos' ) ) : the_row();
+                        $extra_video_iframe = get_sub_field( 'video' );
+                        if ( $extra_video_iframe ) : ?>
+                            <div class="video-wrapper video-wrapper--extra">
+                                <?php echo $extra_video_iframe; ?>
+                            </div>
+                        <?php endif;
+                    endwhile;
+                endif; ?>
             </div>
 
             <?php
