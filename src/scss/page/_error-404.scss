@@ -1,0 +1,116 @@
+@use '../base/variables' as *;
+
+// 404 PAGE
+.error-404-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 160px 0 80px;
+
+  @media (max-width: $bp-sm) {
+    padding: 120px 0 60px;
+  }
+
+  &__inner {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: var(--radius-xl);
+    padding: 56px 48px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+    @media (max-width: $bp-sm) {
+      padding: 40px 24px;
+      border-radius: var(--radius-md);
+    }
+  }
+
+  &__code {
+    font-size: 7rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 0 0 16px;
+    color: var(--clr-accent);
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+
+    @media (max-width: $bp-md) {
+      font-size: 5rem;
+    }
+
+    @media (max-width: $bp-sm) {
+      font-size: 3.5rem;
+    }
+  }
+
+  &__title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin: 0 0 16px;
+
+    @media (max-width: $bp-sm) {
+      font-size: 1.4rem;
+    }
+  }
+
+  &__desc {
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.6;
+    margin: 0 0 32px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  &__btn {
+    display: inline-block;
+    padding: 14px 32px;
+    font-size: 15px;
+    font-weight: 700;
+    text-decoration: none;
+    border-radius: var(--radius-pill);
+    transition: all 0.3s ease;
+
+    &--primary {
+      background: var(--clr-accent);
+      color: var(--clr-primary);
+      border: 1px solid var(--clr-accent);
+
+      &:visited {
+        color: var(--clr-primary);
+      }
+
+      &:hover {
+        background: transparent;
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    &--ghost {
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(4px);
+
+      &:visited {
+        color: rgba(255, 255, 255, 0.85);
+      }
+
+      &:hover {
+        background: var(--clr-accent);
+        border-color: var(--clr-accent);
+        color: var(--clr-primary);
+      }
+    }
+  }
+}

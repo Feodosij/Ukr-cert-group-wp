@@ -12,47 +12,28 @@ get_header();
 
 	<main id="primary" class="site-main">
 
-		<section class="error-404 not-found">
-			<header class="page-header">
-				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'ukr-cert-group' ); ?></h1>
-			</header><!-- .page-header -->
+		<section class="error-404-page">
+			<div class="container">
+				<div class="error-404-page__inner">
+					<p class="error-404-page__code">404</p>
 
-			<div class="page-content">
-				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'ukr-cert-group' ); ?></p>
+					<h1 class="error-404-page__title"><?php esc_html_e( 'Сторінку не знайдено', 'ukr-cert-group' ); ?></h1>
 
-					<?php
-					get_search_form();
+					<p class="error-404-page__desc">
+						<?php esc_html_e( 'Схоже, ця сторінка не існує або була переміщена. Перевірте правильність адреси або скористайтесь посиланнями нижче.', 'ukr-cert-group' ); ?>
+					</p>
 
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
-
-					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'ukr-cert-group' ); ?></h2>
-						<ul>
-							<?php
-							wp_list_categories(
-								array(
-									'orderby'    => 'count',
-									'order'      => 'DESC',
-									'show_count' => 1,
-									'title_li'   => '',
-									'number'     => 10,
-								)
-							);
-							?>
-						</ul>
-					</div><!-- .widget -->
-
-					<?php
-					/* translators: %1$s: smiley */
-					$ukr_cert_group_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'ukr-cert-group' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$ukr_cert_group_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
-
-			</div><!-- .page-content -->
-		</section><!-- .error-404 -->
+					<div class="error-404-page__actions">
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="error-404-page__btn error-404-page__btn--primary">
+							<?php esc_html_e( 'На головну', 'ukr-cert-group' ); ?>
+						</a>
+						<a href="<?php echo esc_url( home_url( '/#contact' ) ); ?>" class="error-404-page__btn error-404-page__btn--ghost" data-contact-link>
+							<?php esc_html_e( "Зв'язатися з нами", 'ukr-cert-group' ); ?>
+						</a>
+					</div>
+				</div>
+			</div>
+		</section>
 
 	</main><!-- #main -->
 
