@@ -35,6 +35,47 @@
             },
             "width": "",
             "height": ""
+        },
+        {
+            "key": "field_69ac53d0a2001",
+            "label": "Додаткові відео (YouTube)",
+            "name": "additional_youtube_videos",
+            "aria-label": "",
+            "type": "repeater",
+            "instructions": "Якщо потрібно вставити більше одного відео, додайте їх сюди — вони будуть показані під основним відео вище.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "table",
+            "min": 0,
+            "max": 0,
+            "collapsed": "",
+            "button_label": "Додати відео",
+            "rows_per_page": 20,
+            "sub_fields": [
+                {
+                    "key": "field_69ac53d0a2002",
+                    "label": "Відео",
+                    "name": "video",
+                    "aria-label": "",
+                    "type": "oembed",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "width": "",
+                    "height": "",
+                    "parent_repeater": "field_69ac53d0a2001"
+                }
+            ]
         }
     ],
     "location": [
@@ -55,5 +96,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1772902406
+    "modified": 1789562231
 }

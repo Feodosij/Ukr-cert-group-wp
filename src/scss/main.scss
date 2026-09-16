@@ -11,6 +11,7 @@
 @use 'contact';
 @use 'cf7-overrides';
 @use './page/privacy';
+@use './page/error-404';
 
 :root {
   --clr-primary:    #0F172A;

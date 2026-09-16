@@ -269,7 +269,7 @@ function create_certifications_cpt() {
         'query_var' => true,
         'rewrite' => array( 'slug' => 'certification' ), 
         'capability_type' => 'post',
-        'has_archive' => 'certifications',
+        'has_archive' => false,
         'hierarchical' => false,
         'menu_position' => 5,
         'menu_icon' => 'dashicons-awards',
